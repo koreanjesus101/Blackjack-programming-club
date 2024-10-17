@@ -53,7 +53,7 @@ while True:
         # * Display messages with a suspenseful effect
         for char in message:
             print(char, end='', flush=True)
-            time.sleep(0.05)
+            time.sleep(0.04)
         print()
 
     # * Display initial hands
@@ -63,6 +63,9 @@ while True:
     while calculate_hand_value(player_hand) < 21:
         # * Ask player for action
         action = input("Do you want to 'hit' or 'stand'? ").lower()
+        while action not in ['hit', 'stand']:
+            print("Invalid input. Please enter 'hit' or 'stand'.")
+            action = input("Do you want to 'hit' or 'stand'? ").lower()
         if action == 'hit':
             # ^ Player hits and draws a new card
             new_card = shuffled_deck.pop()
@@ -73,9 +76,6 @@ while True:
             # * Player stands
             suspenseful_display("Player stands...")
             break
-        else:
-            # * Invalid input message
-            print("Invalid input. Please enter 'hit' or 'stand'.")
 
     # & Dealer's turn
     while calculate_hand_value(dealer_hand) < 17:
@@ -108,7 +108,11 @@ while True:
     print("----------------------")
     
     # * Ask if the player wants to play again
-    if input("Do you want to play again? (yes/no) ").lower() != 'yes':
+    play_again = input("Do you want to play again? (yes/no) ").lower()
+    while play_again not in ['yes', 'no']:
+        print("Invalid input. Please enter 'yes' or 'no'.")
+        play_again = input("Do you want to play again? (yes/no) ").lower()
+    if play_again != 'yes':
         # * Goodbye message
         print("\nThanks for playing! Goodbye.")
         break
