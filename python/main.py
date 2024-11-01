@@ -13,8 +13,24 @@ deck_of_cards = [
 import random
 import time
 
+player_balance = 100
+def place_bet():
+    global player_balance
+    while True:
+        try:
+            bet = int(input(f"Your current balance is ${player_balance}. Enter your bet amount: $"))
+            if bet > 0 and bet <= player_balance:
+                return bet
+            else: 
+                print(f"Invalid bet. PLease bet an amount between $1 and ${player_balance}.")
+        except ValueError:
+            print("Invalid input. PLease enter a valid number.")
+
 while True:
     # ^ Shuffle the deck at the start of each game
+    if player_balance = 0
+        print("You have no more money. Game Over!")
+        break
     shuffled_deck = deck_of_cards.copy()
     random.shuffle(shuffled_deck)
 
@@ -28,6 +44,8 @@ while True:
     
     # * Welcome message
     print("\n--- Welcome to Blackjack ---")
+
+    bet = place_bet()
 
     def calculate_hand_value(hand):
         # & Calculate the total value of a hand
@@ -114,5 +132,5 @@ while True:
         play_again = input("Do you want to play again? (yes/no) ").lower()
     if play_again != 'yes':
         # * Goodbye message
-        print("\nThanks for playing! Goodbye.")
+        print(f" Thanks for playing! Goodbye! You leave with ${player_balance}.")
         break
